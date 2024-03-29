@@ -1,24 +1,24 @@
-//import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
-import Home from './component/Homepage'; // Assuming Homepage component file location
-//import ProductPage from './component/ProductPage'; // Import other page components if needed
-//import LoginPage from './component/LoginPage';
-import Productpage from './component/Productpage';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; 
+import Homepage from './components/Homepage';
+import Productpage from './components/Productpage';
+import LoginPage from './components/LoginPage';
 
-
-function App() {
+const App = () =>  {
   return (
-    <BrowserRouter>
-      <Routes>
-          <Route path="/" element={<Home /> } />
-          <Route path="/products" element={<Productpage /> } />
-      </Routes>
-    </BrowserRouter>
-    
-
+    <Router>
+      <div className="App">
+        <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/products" element={<LoginPage />} />  
+        <Route path="/products" element={<Productpage />} />    
+        <Route path="/login" element={<LoginPage />} />
+          
+  
+        </Routes>
+      </div>
+    </Router>
   );
-};
-
+}
 
 export default App;
