@@ -49,6 +49,7 @@ def authenticate_user():
 
 # Product API
 # Make a GET request to the API endpoint
+# HAVEN'T IMPLEMENTED YET
 
 products = [
     {
