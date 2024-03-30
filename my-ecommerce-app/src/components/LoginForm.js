@@ -21,7 +21,7 @@ const LoginForm = ({ goToSignup }) => {
         });
         if (response.ok) {
           // Login successful, you may want to redirect or perform other actions
-          console.log('Logged in successfully!');
+          setErrorMessage('Logged in successfully!');
           // Reset error message
           setErrorMessage('');
         } else {

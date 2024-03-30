@@ -25,7 +25,7 @@ const SignupForm = ({ goToLogin }) => {
                     });
                     if (response.ok) {
                         // Registration successful, you may want to redirect or display a success message
-                        console.log('Registration successful');
+                        setErrorMessage('Registration successful');
                     } else {
                         const data = await response.json();
                         setErrorMessage(data.error || 'Failed to register user');

@@ -11,6 +11,7 @@ users = []
 @app.route('/registration', methods=['POST'])
 def register_user():
     data = request.get_json()
+    print('Data:', data)
     entered_username = data.get('username')
     entered_password = data.get('password')
     entered_email = data.get('email')
@@ -26,6 +27,8 @@ def register_user():
         'password': entered_password,
         'email': entered_email
     })
+
+    print('Users:', users)
 
     return jsonify({"message": "User registered successfully"}), 201
 
@@ -125,7 +128,7 @@ products = [
 ]
 
 if __name__ == '__main__':
-    app.run
+    app.run(debug=True)
 
 
     
