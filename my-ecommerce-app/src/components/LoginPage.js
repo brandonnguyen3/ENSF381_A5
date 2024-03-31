@@ -14,12 +14,12 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    navigate.push('/products');
+    navigate('/products');
   };
 
   const handleSignup = () => {
 
-    navigate.push('/products');
+    navigate('/login');
   };
 
   return (

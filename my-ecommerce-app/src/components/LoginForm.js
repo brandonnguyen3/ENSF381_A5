@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LoginForm = ({ goToSignup }) => {
+const LoginForm = ({ goToSignup, handleLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,10 +20,9 @@ const LoginForm = ({ goToSignup }) => {
           }),
         });
         if (response.ok) {
-          // Login successful, you may want to redirect or perform other actions
-          setErrorMessage('Logged in successfully!');
-          // Reset error message
-          setErrorMessage('');
+          // Login successful, call handleLogin function to redirect to product page
+          handleLogin();
+          
         } else {
           // Login failed, set error message
           const data = await response.json();
@@ -49,7 +48,7 @@ const LoginForm = ({ goToSignup }) => {
         <label htmlFor="password">Password</label>
         <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit">Login</button> 
         <br />
         <button type="button" onClick={goToSignup}>Switch to Signup</button>
       </form>

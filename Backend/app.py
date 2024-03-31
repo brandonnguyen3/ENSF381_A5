@@ -43,8 +43,8 @@ def authenticate_user():
     # Validate username and password
     for user in users:
         if user['username'] == entered_username and user['password'] == entered_password:
-            # Redirect user to Product page upon successful authentication
-            return redirect('http://localhost:3000/products')
+            #insert code here for setting the logged in state
+            return jsonify({"message": "login successful"}), 201
     
     # Display error message if username or password is incorrect
     return jsonify({"error": "Incorrect username or password"}), 401
