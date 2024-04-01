@@ -8,6 +8,8 @@ CORS(app)
 
 #User Registration API
 users = []
+
+
 @app.route('/registration', methods=['POST'])
 def register_user():
     data = request.get_json()
