@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import Header from './Header';
 import LoginForm from './LoginForm';
@@ -7,18 +7,27 @@ import Footer from './Footer';
 
 const LoginPage = () => {
   const [showLogin, setShowLogin] = useState(true);
-  const navigate = useNavigate(); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const switchForm = () => {
     setShowLogin(!showLogin);
   };
 
   const handleLogin = () => {
+    setIsLoggedIn(true);
     navigate('/products');
   };
 
-  const handleSignup = () => {
+  useEffect(() => {
+    // Redirect to products page if user is logged in
+    if (isLoggedIn) {
+      navigate('/products');
+    }
+  }, [isLoggedIn, navigate]);
+  
 
+  const handleSignup = () => {
     navigate('/login');
   };
 

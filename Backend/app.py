@@ -46,7 +46,7 @@ def authenticate_user():
     for user in users:
         if user['username'] == entered_username and user['password'] == entered_password:
             #insert code here for setting the logged in state
-            return jsonify({"message": "login successful"}), 201
+            return jsonify({"message": "login successful"}), 200
     
     # Display error message if username or password is incorrect
     return jsonify({"error": "Incorrect username or password"}), 401

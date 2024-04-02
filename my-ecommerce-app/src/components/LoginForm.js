@@ -1,59 +1,59 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
-const LoginForm = ({ goToSignup, handleLogin }) => {
+
+function LoginForm({goToSignup}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [message, setMessage] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (username.trim() !== '' && password.trim() !== '') {
-      try {
-        const response = await fetch('http://localhost:5000/authenticate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        });
-        if (response.ok) {
-          // Login successful, call handleLogin function to redirect to product page
-          handleLogin();
-          
-        } else {
-          // Login failed, set error message
-          const data = await response.json();
-          setErrorMessage(data.error || 'Failed to log in');
-        }
-      } catch (error) {
-        console.error('Error logging in:', error);
-        setErrorMessage('Failed to log in');
+
+  function handleLogin() {
+    fetch('http://127.0.0.1:5000/authenticate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({'username':username, 'password':password}),
+    })
+    .then((response) => response.json())
+    .then(response => {
+      if (response.authenticated) {
+        setAuthenticated(true);
+        setMessage('Login successful')
+        navigate('/products');
+      } else {
+        setAuthenticated(false);
+        setMessage('Invalid username or password');
       }
-    } else {
-      setErrorMessage('Please enter your username and password.');
-    }
-  };
+
+    })
+    .catch((error) => {
+      setMessage('Failed to login');
+    });
+};
+
+if(authenticated) {
+  navigate('/products');
+}
 
   return (
     <div>
       <h2>Login</h2>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
+      {message && <p style={{ color: 'red' }}>{message}</p>}
         <label htmlFor="username">Username</label>
         <input type="text" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <br />
         <label htmlFor="password">Password</label>
         <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <br />
-        <button type="submit">Login</button> 
+        <button type="submit" onClick={handleLogin}>Login</button> 
         <br />
         <button type="button" onClick={goToSignup}>Switch to Signup</button>
-      </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default LoginForm; 

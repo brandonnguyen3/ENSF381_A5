@@ -4,27 +4,28 @@ import ProductList from './ProductList';
 import Cart from './Cart';
 import Footer from './Footer';
 import productsData from '../data/products';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Productpage = () => {
+const Productpage = ({ isLoggedIn }) => {
   const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
+
+  console.log('isLoggedIn:', isLoggedIn);
 
   // Load cart items from localStorage on component mount
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
       console.log("Loaded cart items from localStorage:", storedCartItems);
-      console.log("Loaded cart items in JSON", JSON.parse (storedCartItems));
+      console.log("Loaded cart items in JSON", JSON.parse(storedCartItems));
       setCartItems(JSON.parse(storedCartItems));
-  
     }
-  }, []); 
+  }, []);
 
-  
   useEffect(() => {
     console.log("Productpage component rerendered");
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]); 
+  }, [cartItems]);
 
   const addToCart = (product) => {
     const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
@@ -45,9 +46,9 @@ const Productpage = () => {
     const updatedCartItems = cartItems.map(item => {
       if (item.id === productId) {
         if (item.quantity === 1) {
-          return null; 
+          return null;
         } else {
-          return { ...item, quantity: item.quantity - 1 }; 
+          return { ...item, quantity: item.quantity - 1 };
         }
       }
       return item;
@@ -56,6 +57,13 @@ const Productpage = () => {
     console.log("Updated Cart Items:", updatedCartItems);
     setCartItems(updatedCartItems);
   };
+
+  if (!isLoggedIn) {
+    navigate('/login');
+    return null;
+  } else {
+    navigate('/products');
+  }
 
   return (
     <div>
