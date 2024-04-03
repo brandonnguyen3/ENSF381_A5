@@ -5,7 +5,9 @@ import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import Footer from './Footer';
 
-const LoginPage = () => {
+const LoginPage = ({setLoggedIn}) => {
+
+
   const [showLogin, setShowLogin] = useState(true);
   const navigate = useNavigate(); 
 
@@ -14,6 +16,7 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
+    setLoggedIn(true);
     navigate('/products');
   };
 
