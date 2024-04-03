@@ -129,6 +129,11 @@ products = [
     }
 ]
 
+# Route for fetching products
+@app.route('/products', methods=['GET'])
+def get_products():
+    return jsonify(products)
+
 if __name__ == '__main__':
     app.run(debug=True)
 

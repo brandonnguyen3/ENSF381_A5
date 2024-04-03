@@ -3,12 +3,15 @@ import Header from './Header';
 import ProductList from './ProductList';
 import Cart from './Cart';
 import Footer from './Footer';
-import productsData from '../data/products';
 import { Link } from 'react-router-dom';
 
 const Productpage = () => {
+  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-
+  
+  useEffect(() => {
+    fetchProducts();
+  },[]);
   // Load cart items from localStorage on component mount
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
@@ -19,6 +22,19 @@ const Productpage = () => {
   
     }
   }, []); 
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
 
   
   useEffect(() => {
@@ -63,7 +79,7 @@ const Productpage = () => {
       <table>
         <tbody>
           <tr>
-            <td><ProductList products={productsData} onAddToCart={addToCart} /></td>
+            <td><ProductList products={products} onAddToCart={addToCart} /></td>
             <td style={{ verticalAlign: 'top' }}><Cart cartItems={cartItems} onRemove={removeFromCart} /></td>
           </tr>
         </tbody>
