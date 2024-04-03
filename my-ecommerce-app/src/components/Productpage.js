@@ -1,3 +1,13 @@
+/*
+=========================================================
+Name        : ProductPage.js
+Assignment  : 5
+Author(s)   : Thalia Espinoza,  Brandon Nguyen
+UCID        : 30195212, 30169800
+Submission  : 04/08/2024
+Description : ProductPage implementation
+=========================================================
+*/ 
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import ProductList from './ProductList';

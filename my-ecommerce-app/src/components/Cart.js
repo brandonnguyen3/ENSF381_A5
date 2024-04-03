@@ -1,4 +1,14 @@
-// Cart.js
+/*
+=========================================================
+Name        : Cart.js
+Assignment  : 5
+Author(s)   : Thalia Espinoza,  Brandon Nguyen
+UCID        : 30195212, 30169800
+Submission  : 04/08/2024
+Description :cart implementation
+=========================================================
+*/
+
 import React from 'react';
 import CartItem from './CartItem';
 

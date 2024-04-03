@@ -1,3 +1,14 @@
+/*
+=========================================================
+Name        : Homepage.js
+Assignment  : 5
+Author(s)   : Thalia Espinoza,  Brandon Nguyen
+UCID        : 30195212, 30169800
+Submission  : 04/08/2024
+Description : homepage implementation 
+=========================================================
+*/
+
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import HomeMainSection from './HomeMainSection';
